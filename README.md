@@ -50,3 +50,87 @@ LLM support: OpenAI / Azure OpenAI / Zhipu AI (GLM-4-Flash) – any OpenAI‑com
 ---
 
 ## 🏗️ System Architecture
+
+[Client / Browser] → YARP Gateway (:5000) → AgentService (:5001)
+│ │
+│ ├─ MemoController
+│ ├─ StockService (plugin)
+│ └─ MemoService (plugin)
+↓ ↓
+[Resilience Policies] TechnicalIndicatorService
+(Rate limit/Circuit/Retry) ├─ ML.NET regression/clustering/time series
+└─ OnnxPredictionService
+└─ IStockRepository (HTTP + Polly)
+
+---
+
+## 🔄 Key Workflow: Generate Investment Memo
+
+1. Client `POST /api/agent/GenerateMemo` (stock code + date)
+2. YARP routes request to `MemoController`
+3. `StockService.GetStockAsync` calls Repository (automatic retry/circuit breaker)
+4. `TechnicalIndicatorService.CalculateIndicators` computes MAs, RSI, volatility. If data sufficient → ML.NET prediction, anomaly detection, risk clustering
+5. `MemoService.GenerateMemoAsync` calculates risk score (0–100) + invokes LLM via Semantic Kernel to generate natural language advice
+6. Returns structured `InvestmentMemo` JSON; Serilog logs full request context
+
+---
+
+## 🛡️ Enterprise Reliability Features
+
+| Feature | Description |
+|---------|-------------|
+| ⏱️ Retry & Circuit Breaker | Exponential backoff (max 3 retries) + circuit breaker (5 failures → open 30s, half‑open probe). |
+| 🚦 Rate Limiting & Bulkhead | Token bucket: 100 req/min per IP; Bulkhead limits concurrent execution (max 10). |
+| 📋 Structured Logging | Serilog to console and rolling files, enriched with machine name, thread ID, and TraceId for easy ELK integration. |
+| 🧪 Testing & Evaluation | xUnit + Moq for unit tests; LangSmith evaluation scripts to monitor agent output quality. |
+
+---
+
+## 📁 Project Structure
+StockAnalysisAgent/
+├── src/
+│ ├── StockAgent.Gateway/ # YARP gateway
+│ ├── StockAgent.AgentService/ # Core Agent (Controllers, Services)
+│ ├── StockAgent.ML.Service/ # ML.NET + ONNX services
+│ ├── StockAgent.Shared/ # DTOs, constants
+│ └── StockAgent.Infrastructure/ # Repository, Polly policies
+├── tests/
+│ ├── StockAgent.UnitTests/ # xUnit + Moq tests
+│ └── StockAgent.Evaluation/ # LangSmith evaluation scripts
+├── docker-compose.yml
+└── Dockerfile.agent / gateway
+
+
+---
+
+## 🚀 Quick Start
+
+**Prerequisites:** .NET 10 SDK, Docker (optional), LLM API Key (OpenAI / Zhipu)
+
+**Run locally:**
+
+```bash
+dotnet restore && dotnet build
+cd src/StockAgent.AgentService && dotnet run --urls "http://localhost:5001"
+cd ../StockAgent.Gateway && dotnet run --urls "http://localhost:5000"
+
+
+Swagger UI: http://localhost:5001/swagger
+
+🔮 Extensibility & Future Directions
+📡 Connect to real data sources (Wind, JoinQuant, Yahoo Finance) – implement IStockRepository
+
+🤝 Multi-agent collaboration (Researcher, Trader, Risk) – Semantic Kernel Group Chat
+
+🖥️ Local LLM support (LLamaSharp / Ollama) to reduce API costs
+
+📱 Blazor / React frontend for conversational investment Q&A
+
+🎯 Summary
+Stock Analysis Agent is a production‑ready reference project demonstrating how .NET engineers can build robust AI Agents. It combines Semantic Kernel orchestration, local ML.NET models, enterprise resilience (Polly), structured logging (Serilog), and rigorous testing – all within the familiar C# ecosystem. The project proves that C#/.NET is a first‑class citizen for AI application development, offering performance, type safety, and maintainability for mission‑critical financial tasks.
+
+MIT Licensed – free for learning and commercial use.
+
+Stock Analysis Agent – Built with .NET 10, Semantic Kernel & ML.NET | AI for Investment
+
+
