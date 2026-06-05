@@ -1,3 +1,4 @@
+```markdown
 # 📈 Stock Analysis Agent
 
 AI-Powered Investment Assistant built with **.NET Core 10 + Semantic Kernel + ML.NET**  
@@ -51,16 +52,18 @@ LLM support: OpenAI / Azure OpenAI / Zhipu AI (GLM-4-Flash) – any OpenAI‑com
 
 ## 🏗️ System Architecture
 
-[Client / Browser] → YARP Gateway (:5000) → AgentService (:5001)
-│ │
-│ ├─ MemoController
-│ ├─ StockService (plugin)
-│ └─ MemoService (plugin)
-↓ ↓
-[Resilience Policies] TechnicalIndicatorService
-(Rate limit/Circuit/Retry) ├─ ML.NET regression/clustering/time series
-└─ OnnxPredictionService
-└─ IStockRepository (HTTP + Polly)
+```
+[Client / Browser]  →  YARP Gateway (:5000)  →  AgentService (:5001)
+                           │                         │
+                           │                         ├─ MemoController
+                           │                         ├─ StockService (plugin)
+                           │                         └─ MemoService (plugin)
+                           ↓                         ↓
+                    [Resilience Policies]     TechnicalIndicatorService
+                    (Rate limit/Circuit/Retry) ├─ ML.NET regression/clustering/time series
+                                               └─ OnnxPredictionService
+                                               └─ IStockRepository (HTTP + Polly)
+```
 
 ---
 
@@ -87,19 +90,21 @@ LLM support: OpenAI / Azure OpenAI / Zhipu AI (GLM-4-Flash) – any OpenAI‑com
 ---
 
 ## 📁 Project Structure
+
+```
 StockAnalysisAgent/
 ├── src/
-│ ├── StockAgent.Gateway/ # YARP gateway
-│ ├── StockAgent.AgentService/ # Core Agent (Controllers, Services)
-│ ├── StockAgent.ML.Service/ # ML.NET + ONNX services
-│ ├── StockAgent.Shared/ # DTOs, constants
-│ └── StockAgent.Infrastructure/ # Repository, Polly policies
+│   ├── StockAgent.Gateway/               # YARP gateway
+│   ├── StockAgent.AgentService/          # Core Agent (Controllers, Services)
+│   ├── StockAgent.ML.Service/            # ML.NET + ONNX services
+│   ├── StockAgent.Shared/                # DTOs, constants
+│   └── StockAgent.Infrastructure/        # Repository, Polly policies
 ├── tests/
-│ ├── StockAgent.UnitTests/ # xUnit + Moq tests
-│ └── StockAgent.Evaluation/ # LangSmith evaluation scripts
+│   ├── StockAgent.UnitTests/             # xUnit + Moq tests
+│   └── StockAgent.Evaluation/            # LangSmith evaluation scripts
 ├── docker-compose.yml
 └── Dockerfile.agent / gateway
-
+```
 
 ---
 
@@ -113,24 +118,28 @@ StockAnalysisAgent/
 dotnet restore && dotnet build
 cd src/StockAgent.AgentService && dotnet run --urls "http://localhost:5001"
 cd ../StockAgent.Gateway && dotnet run --urls "http://localhost:5000"
+```
 
+**Swagger UI:** [http://localhost:5001/swagger](http://localhost:5001/swagger)
 
-Swagger UI: http://localhost:5001/swagger
+---
 
-🔮 Extensibility & Future Directions
-📡 Connect to real data sources (Wind, JoinQuant, Yahoo Finance) – implement IStockRepository
+## 🔮 Extensibility & Future Directions
 
-🤝 Multi-agent collaboration (Researcher, Trader, Risk) – Semantic Kernel Group Chat
+- 📡 Connect to real data sources (Wind, JoinQuant, Yahoo Finance) – implement `IStockRepository`
+- 🤝 Multi-agent collaboration (Researcher, Trader, Risk) – Semantic Kernel Group Chat
+- 🖥️ Local LLM support (LLamaSharp / Ollama) to reduce API costs
+- 📱 Blazor / React frontend for conversational investment Q&A
 
-🖥️ Local LLM support (LLamaSharp / Ollama) to reduce API costs
+---
 
-📱 Blazor / React frontend for conversational investment Q&A
+## 🎯 Summary
 
-🎯 Summary
-Stock Analysis Agent is a production‑ready reference project demonstrating how .NET engineers can build robust AI Agents. It combines Semantic Kernel orchestration, local ML.NET models, enterprise resilience (Polly), structured logging (Serilog), and rigorous testing – all within the familiar C# ecosystem. The project proves that C#/.NET is a first‑class citizen for AI application development, offering performance, type safety, and maintainability for mission‑critical financial tasks.
+**Stock Analysis Agent** is a production‑ready reference project demonstrating how .NET engineers can build robust AI Agents. It combines Semantic Kernel orchestration, local ML.NET models, enterprise resilience (Polly), structured logging (Serilog), and rigorous testing – all within the familiar C# ecosystem. The project proves that **C#/.NET is a first‑class citizen for AI application development**, offering performance, type safety, and maintainability for mission‑critical financial tasks.
 
-MIT Licensed – free for learning and commercial use.
+> MIT Licensed – free for learning and commercial use.
 
-Stock Analysis Agent – Built with .NET 10, Semantic Kernel & ML.NET | AI for Investment
+---
 
-
+*Stock Analysis Agent – Built with .NET 10, Semantic Kernel & ML.NET | AI for Investment*
+```
