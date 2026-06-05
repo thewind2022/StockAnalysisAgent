@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis Agent - 智能投资助手 | 项目介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: #f5f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin-bottom: 0.75rem;
+                letter-spacing: -0.02em;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                opacity: 0.85;
+                max-width: 800px;
+            }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            padding: 0.25rem 0.75rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        .content {
+            padding: 2rem 2rem 3rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 1.8rem 0 1rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1rem;
+        }
+
+            h2:first-of-type {
+                margin-top: 0;
+            }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+            color: #0f172a;
+        }
+
+        .grid-2, .grid-3 {
+            display: grid;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+        }
+
+        .card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+            .card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+                border-color: #cbd5e1;
+            }
+
+            .card h4 {
+                font-size: 1.2rem;
+                font-weight: 600;
+                margin-bottom: 0.75rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .card p {
+                color: #334155;
+                font-size: 0.95rem;
+            }
+
+        .tech-badge {
+            background: #e2e8f0;
+            color: #1e293b;
+            border-radius: 30px;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.25rem 0.25rem 0 0;
+        }
+
+        .architecture {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            font-family: monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            overflow-x: auto;
+            white-space: pre;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+        }
+
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1.2rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 0.85rem;
+            background: #fafcff;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>📈 Stock Analysis Agent</h1>
+            <p>基于 .NET Core 10 + Semantic Kernel + ML.NET 的智能投资助手<br>企业级 AI Agent，实现股票分析、风险预警与投资备忘录自动生成</p>
+            <div class="badge">✨ 生产级 · 可扩展 · 完全自托管</div>
+        </div>
+        <div class="content">
+            <!-- 项目背景 -->
+            <h2>🎯 项目背景与目标</h2>
+            <p>金融投资领域每天产生海量数据，分析师需要手动查询行情、计算技术指标、评估风险并撰写投资备忘录——耗时且易错。本项目利用 <strong>.NET 10 + Semantic Kernel + ML.NET</strong> 构建一个能够<strong>可靠完成投资相关任务</strong>的 AI Agent，实现数据查询、技术分析、异常检测、风险聚类及智能备忘录生成的全流程自动化。</p>
+
+            <div class="highlight">
+                ✔️ 查询股票数据（价格、成交量、持仓）<br>
+                ✔️ 计算移动平均线(5/10/20/30/60/120)、RSI、年化波动率<br>
+                ✔️ 基于统计突变的价格异常检测<br>
+                ✔️ K‑Means 风险等级分类（低/中/高）<br>
+                ✔️ ML.NET 回归预测次日收盘价<br>
+                ✔️ ONNX 模型情感/风险分析（可扩展）<br>
+                ✔️ 大语言模型生成自然语言投资建议<br>
+                ✔️ 企业级可靠性：网关、限流熔断、结构化日志、单元测试
+            </div>
+
+            <!-- 核心模块 -->
+            <h2>⚙️ 核心功能模块</h2>
+            <div class="grid-3">
+                <div class="card"><h4>📊 股票数据服务</h4><p>Repository 模式 + HttpClient + Polly 弹性策略，从 API 或模拟源获取股票实时/历史数据。</p></div>
+                <div class="card"><h4>📐 技术指标计算</h4><p>MA5~MA120、RSI、年化波动率。纯数学算法 + ML.NET 辅助，精度高。</p></div>
+                <div class="card"><h4>⚠️ 价格异常检测</h4><p>基于 ML.NET TimeSeries 的 IID 突变点检测，识别价格模式持久性改变。</p></div>
+                <div class="card"><h4>🔖 风险聚类</h4><p>K‑Means 聚类（波动率、RSI、夏普比率、最大回撤）输出低/中/高风险等级。</p></div>
+                <div class="card"><h4>📈 价格预测</h4><p>利用历史5日价格+成交量，使用 SDCA 回归预测次日收盘价。</p></div>
+                <div class="card"><h4>🧠 AI 备忘录生成</h4><p>Semantic Kernel 调用 LLM（OpenAI/智谱），基于技术指标和风险分生成专业投资建议。</p></div>
+                <div class="card"><h4>🛡️ 弹性与可靠性</h4><p>Polly 重试、熔断、限流、舱壁隔离；YARP 网关统一入口。</p></div>
+                <div class="card"><h4>📝 结构化日志</h4><p>Serilog 控制台 + 文件滚动，记录请求、AI Token 消耗、工具执行细节。</p></div>
+                <div class="card"><h4>🧪 测试与评估</h4><p>xUnit + Moq 单元测试（覆盖率>80%）；LangSmith 离线评估 Agent 输出。</p></div>
+            </div>
+
+            <!-- 技术栈 -->
+            <h2>🛠️ 技术栈</h2>
+            <div class="grid-2">
+                <div class="card"><h4>⭐ 核心框架</h4><span class="tech-badge">.NET Core 10</span> <span class="tech-badge">ASP.NET Core</span> <span class="tech-badge">C# 14</span><br><br><strong>AI 编排：</strong>Semantic Kernel 1.32<br><strong>机器学习：</strong>ML.NET 3.0.1 + ONNX Runtime 1.19</div>
+                <div class="card"><h4>🔌 基础设施</h4><span class="tech-badge">YARP 网关</span> <span class="tech-badge">Polly 8.4</span> <span class="tech-badge">Serilog</span> <span class="tech-badge">xUnit + Moq</span><br><span class="tech-badge">LangSmith(python)</span> <span class="tech-badge">Docker</span></div>
+            </div>
+            <p>LLM 支持：OpenAI / Azure OpenAI / 智谱AI (GLM-4-Flash) 等兼容 OpenAI 协议的服务。</p>
+
+            <!-- 架构图（文字版） -->
+            <h2>🏗️ 系统架构</h2>
+            <div class="architecture">
+                [客户端/浏览器]  →  YARP Gateway (:5000)  →  AgentService (:5001)
+                │                         │
+                │                         ├─ MemoController
+                │                         ├─ StockService (插件)
+                │                         └─ MemoService (插件)
+                ↓                         ↓
+                [弹性策略]                 TechnicalIndicatorService
+                (限流/熔断/重试)           ├─ ML.NET 回归/聚类/异常检测
+                └─ OnnxPredictionService
+                └─ IStockRepository (HTTP + Polly)
+            </div>
+
+            <!-- 关键工作流程 -->
+            <h2>🔄 典型工作流：生成投资备忘录</h2>
+            <ol style="margin:1rem 0 1rem 1.8rem; background:#f8fafc; padding:1rem 1rem 1rem 2rem; border-radius:20px;">
+                <li>客户端 <code>POST /api/agent/GenerateMemo</code> (股票代码+日期)</li>
+                <li>YARP 网关路由到 <code>MemoController</code></li>
+                <li><code>StockService.GetStockAsync</code> 调用 Repository 获取股票数据（自动重试/熔断）</li>
+                <li><code>TechnicalIndicatorService.CalculateIndicators</code> 计算 MA、RSI、波动率；数据足够时执行 ML.NET 预测、异常检测、风险聚类</li>
+                <li><code>MemoService.GenerateMemoAsync</code> 计算风险分 (0~100) + 调用 LLM (Semantic Kernel) 生成自然语言投资建议</li>
+                <li>返回结构化 <code>InvestmentMemo</code> JSON，Serilog 记录完整请求上下文</li>
+            </ol>
+
+            <!-- 可靠性设计 -->
+            <h2>🛡️ 企业级可靠性设计</h2>
+            <div class="grid-2">
+                <div class="card"><h4>⏱️ 重试与熔断</h4><p>指数退避重试(最多3次) + 断路器(5次失败触发，30秒半开探测)，防止下游雪崩。</p></div>
+                <div class="card"><h4>🚦 限流与舱壁</h4><p>令牌桶限流 (100次/分钟/IP)；舱壁隔离限制最大并发10，避免资源耗尽。</p></div>
+                <div class="card"><h4>📋 结构化日志</h4><p>Serilog 输出到控制台和滚动文件，自动丰富机器名/线程Id/请求TraceId，便于 ELK 接入。</p></div>
+                <div class="card"><h4>🧪 测试与评估</h4><p>xUnit 单元测试覆盖服务层逻辑，Moq 模拟依赖；LangSmith 评估脚本验证 Agent 输出质量。</p></div>
+            </div>
+
+            <!-- 目录结构简述 -->
+            <h2>📁 项目结构</h2>
+            <pre style="background:#1e293b; color:#e2e8f0; padding:1rem; border-radius:16px; overflow-x:auto; font-size:0.8rem;">
+StockAnalysisAgent/
+├── src/
+│   ├── StockAgent.Gateway/               # YARP 网关
+│   ├── StockAgent.AgentService/          # 核心 Agent (Controllers, Services)
+│   ├── StockAgent.ML.Service/            # ML.NET + ONNX 服务
+│   ├── StockAgent.Shared/                # DTOs, 常量
+│   └── StockAgent.Infrastructure/        # Repository, Polly 策略
+├── tests/
+│   ├── StockAgent.UnitTests/             # xUnit + Moq 测试
+│   └── StockAgent.Evaluation/            # LangSmith 评估脚本
+├── docker-compose.yml
+└── Dockerfile.agent / gateway
+        </pre>
+
+            <!-- 快速开始 -->
+            <h2>🚀 快速运行</h2>
+            <div class="highlight">
+                <strong>环境要求：</strong> .NET 10 SDK, Docker (可选), LLM API Key (OpenAI/智谱)<br>
+                <strong>本地运行：</strong><br>
+                <code>dotnet restore && dotnet build</code><br>
+                <code>cd src/StockAgent.AgentService &amp;&amp; dotnet run --urls "http://localhost:5001"</code><br>
+                <code>cd ../StockAgent.Gateway &amp;&amp; dotnet run --urls "http://localhost:5000"</code><br>
+                <strong>Swagger 文档：</strong> <a href="http://localhost:5001/swagger" target="_blank">http://localhost:5001/swagger</a>
+            </div>
+
+            <!-- 扩展性 -->
+            <h2>🔮 扩展方向</h2>
+            <ul style="margin-left:1.5rem; margin-bottom:1rem;">
+                <li>📡 接入真实数据源（Wind、聚宽、Yahoo Finance）—— 实现 <code>IStockRepository</code></li>
+                <li>🤝 多 Agent 协作（研究员 Agent + 交易员 Agent + 风控 Agent）—— Semantic Kernel Group Chat</li>
+                <li>🖥️ 本地 LLM 支持（LLamaSharp / Ollama），降低 API 成本</li>
+                <li>📱 Blazor / React 前端对话界面，自然语言交互</li>
+            </ul>
+
+            <!-- 总结 -->
+            <h2>🎯 总结</h2>
+            <p><strong>Stock Analysis Agent</strong> 是一个展示 .NET 程序员如何系统化构建生产级 AI Agent 的完整参考项目。它集成了 Semantic Kernel 编排、ML.NET 本地学习、Polly 弹性、Serilog 可观测性等关键能力，不仅满足了金融投资场景的需求，更证明了 <strong>C#/.NET 在 AI 应用开发中的工程优势</strong>——高性能、强类型、可维护，是打造可靠 AI 基础设施的理想选择。</p>
+            <p style="margin-top:1rem; font-style:italic;">项目采用 MIT 许可证，可自由用于学习和商业扩展。</p>
+        </div>
+        <footer>
+            Generated by Stock Analysis Agent Doc · 基于真实代码与设计文档 · 展示 .NET + AI 最佳实践
+        </footer>
+    </div>
+</body>
+</html>

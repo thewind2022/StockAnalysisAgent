@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway
+    ports:
+      - "5000:5000"
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    ports:
+      - "5001:5001"

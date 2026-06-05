@@ -1,0 +1,27 @@
+<Solution>
+  <Folder Name="/Evaluation/">
+    <File Path="evaluate_agent.py" />
+    <File Path="my_agent.py" />
+    <File Path="requirements.txt" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="docker-compose.yml" />
+    <File Path="Dockerfile.agent" />
+    <File Path="Dockerfile.gateway" />
+    <File Path="generate_dummy_onnx.py" />
+    <File Path="Introduction-en.html" />
+    <File Path="Introduction.html" />
+    <File Path="sentiment_model.onnx" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/AgentService/AgentService.csproj" />
+    <Project Path="src/Gateway/Gateway.csproj" />
+    <Project Path="src/Infrastructure/Infrastructure.csproj" />
+    <Project Path="src/ML.Service/ML.Service.csproj" />
+    <Project Path="src/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/UnitTests/UnitTests.csproj" />
+  </Folder>
+</Solution>

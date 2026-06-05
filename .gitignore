@@ -1,0 +1,13 @@
+gitignore
+# Visual Studio 等编译器的临时文件和用户配置
+*.user
+*.suo
+.vs/
+# 编译生成的依赖和输出文件
+packages/
+bin/
+obj/
+*.dll
+*.exe
+# 日志文件
+*.log
