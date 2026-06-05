@@ -1,4 +1,3 @@
-```markdown
 # 📈 Stock Analysis Agent
 
 AI-Powered Investment Assistant built with **.NET Core 10 + Semantic Kernel + ML.NET**  
@@ -94,14 +93,14 @@ LLM support: OpenAI / Azure OpenAI / Zhipu AI (GLM-4-Flash) – any OpenAI‑com
 ```
 StockAnalysisAgent/
 ├── src/
-│   ├── StockAgent.Gateway/               # YARP gateway
-│   ├── StockAgent.AgentService/          # Core Agent (Controllers, Services)
-│   ├── StockAgent.ML.Service/            # ML.NET + ONNX services
-│   ├── StockAgent.Shared/                # DTOs, constants
-│   └── StockAgent.Infrastructure/        # Repository, Polly policies
+│   ├── Gateway/               # YARP gateway
+│   ├── AgentService/          # Core Agent (Controllers, Services)
+│   ├── ML.Service/            # ML.NET + ONNX services
+│   ├── Shared/                # DTOs, constants
+│   └── Infrastructure/        # Repository, Polly policies
 ├── tests/
-│   ├── StockAgent.UnitTests/             # xUnit + Moq tests
-│   └── StockAgent.Evaluation/            # LangSmith evaluation scripts
+│   ├── UnitTests/             # xUnit + Moq tests
+│   └── Evaluation/            # LangSmith evaluation scripts
 ├── docker-compose.yml
 └── Dockerfile.agent / gateway
 ```
@@ -116,8 +115,8 @@ StockAnalysisAgent/
 
 ```bash
 dotnet restore && dotnet build
-cd src/StockAgent.AgentService && dotnet run --urls "http://localhost:5001"
-cd ../StockAgent.Gateway && dotnet run --urls "http://localhost:5000"
+cd src/AgentService && dotnet run --urls "http://localhost:5001"
+cd ../Gateway && dotnet run --urls "http://localhost:5000"
 ```
 
 **Swagger UI:** [http://localhost:5001/swagger](http://localhost:5001/swagger)
@@ -142,4 +141,5 @@ cd ../StockAgent.Gateway && dotnet run --urls "http://localhost:5000"
 ---
 
 *Stock Analysis Agent – Built with .NET 10, Semantic Kernel & ML.NET | AI for Investment*
-```
+
+---
